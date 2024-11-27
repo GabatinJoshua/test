@@ -4,27 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .alert-container {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1050;
-            width: 100%;
-            max-width: 600px;
-            padding: 0 15px;
-        }
-    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light flex-column">
 
-    <!-- Display Alert -->
-    <div class="alert-container">
+    <div class="container mt-3 w-100 d-flex justify-content-center">
         <?php
-        // Static users list
         $users = [
             ['type' => 'Admin', 'username' => 'admin', 'password' => 'Pass1234'],
             ['type' => 'Admin', 'username' => 'renmark', 'password' => 'Pogi1234'],
@@ -35,7 +20,6 @@
 
         $alert = "";
 
-        // Handle form submission
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $userType = $_POST['user_type'];
             $username = $_POST['username'];
@@ -43,7 +27,6 @@
 
             $isValid = false;
 
-            // Validate user credentials
             foreach ($users as $user) {
                 if ($user['type'] === $userType && $user['username'] === $username && $user['password'] === $password) {
                     $isValid = true;
@@ -51,7 +34,6 @@
                 }
             }
 
-            // Display appropriate alert
             if ($isValid) {
                 $alert = "
                     <div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -67,18 +49,15 @@
             }
         }
 
-        // Print the alert if set
         echo $alert;
         ?>
     </div>
 
-    <!-- Login Form -->
     <div class="card p-4 shadow" style="width: 24rem;">
         <h3 class="text-center mb-4">Login</h3>
         <form method="POST">
             <div class="mb-3">
-                <label for="user_type" class="form-label">User Type:</label>
-                <select name="user_type" id="user_type" class="form-select" required>
+                <select name="user_type" id="user_type" class="form-select">
                     <option value="Admin">Admin</option>
                     <option value="Content Manager">Content Manager</option>
                     <option value="System User">System User</option>
@@ -86,20 +65,17 @@
             </div>
 
             <div class="mb-3">
-                <label for="username" class="form-label">Username:</label>
-                <input type="text" name="username" id="username" class="form-control" required>
+                <input type="text" name="username" id="username" placeholder="Username" class="form-control">
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" name="password" id="password" class="form-control" required>
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
